@@ -17,7 +17,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class wildCommand implements CommandExecutor {
     private GlacierCraft main;
-    public HashMap<String, Long> cooldowns = new HashMap<String, Long>();
+
 
     public wildCommand(GlacierCraft main) {
         this.main = main;
@@ -28,8 +28,8 @@ public class wildCommand implements CommandExecutor {
         if(sender instanceof Player){
             Player player = (Player) sender;
             int cooldownTime = 970; // Get number of seconds from wherever you want
-            if(cooldowns.containsKey(sender.getName())) {
-                long secondsLeft = ((cooldowns.get(sender.getName()) / 1000) + cooldownTime) - (System.currentTimeMillis() / 1000);
+            if(main.cooldowns.containsKey(sender.getName())) {
+                long secondsLeft = ((main.cooldowns.get(sender.getName()) / 1000) + cooldownTime) - (System.currentTimeMillis() / 1000);
                 if (secondsLeft > 0) {
                     // Still cooling down
                     player.sendMessage(ChatColor.RED + "You can only use /wild one time!");
@@ -40,7 +40,7 @@ public class wildCommand implements CommandExecutor {
             if(player.getStatistic(Statistic.PLAY_ONE_MINUTE)/20/60 <= 15){
                 player.sendMessage(ChatColor.GREEN + "Sending you to the wild!");
                 sendToWild(player);
-                cooldowns.put(sender.getName(), System.currentTimeMillis());
+                main.cooldowns.put(sender.getName(), System.currentTimeMillis());
             } else {
                 player.sendMessage(ChatColor.RED + "You have played for longer than 15 minutes!");
             }
