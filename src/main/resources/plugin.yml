@@ -1,0 +1,9 @@
+name: GlacierCraft
+version: '${project.version}'
+main: glacier.craft.glaciercraft.GlacierCraft
+api-version: 1.19
+authors: [ AwesomeChicken8 ]
+description: The plugin for Glacier Craft!
+commands:
+  wild:
+  admin:
